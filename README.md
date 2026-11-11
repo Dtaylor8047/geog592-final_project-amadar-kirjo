@@ -5,3 +5,7 @@
 
 - Census Data
 - Reproject
+
+## day 2 
+
+- project stuff
