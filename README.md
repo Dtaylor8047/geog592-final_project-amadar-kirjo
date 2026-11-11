@@ -9,3 +9,6 @@
 ## day 2 
 
 - project stuff
+
+## day 3
+- 
