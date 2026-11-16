@@ -36,7 +36,7 @@ def csv_to_df(csv_path, lat_col=None, lon_col=None, geometry_col=None, crs="EPSG
 ## Test 
 
 test_gdf = csv_to_df(
-    r"C:\Users\Jakcr\OneDrive\Documents\Dev\GEOG592\geog592-amadar-kirjo\Function\test.csv",
+    r"C:\Users\Jakcr\OneDrive\Documents\Dev\GEOG592\geog592-amadar-kirjo\test.csv",
     lat_col="Latitude",
     lon_col="Longitude"
 )
