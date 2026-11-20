@@ -33,6 +33,29 @@ def csv_to_df(csv_path, lat_col=None, lon_col=None, geometry_col=None, crs="EPSG
     raise ValueError("Latitude and longitude columns must be provided.")
 
 
+def validate(gdf, fill_value=0):
+
+    gdf = gdf.copy()
+
+    # Select all columns except geometry
+    columns = gdf.columns.drop(gdf.geometry.name)
+
+    # Replace missing values
+    gdf[columns] = gdf[columns].fillna(fill_value)
+
+    return gdf
+
+def clip(gdf, state_name):
+    state=gdp
+    
+
+
+
+
+
+
+
+
 ## Test 
 
 test_gdf = csv_to_df(
