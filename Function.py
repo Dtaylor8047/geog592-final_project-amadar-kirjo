@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import argparse as arg
 import re
+from matplotlib.backends.backend_pdf import PdfPages 
 
 def main():
     smoother = arg.ArgumentParser(
@@ -18,6 +19,9 @@ def main():
         # I want the loop to check for file types to see if they are correct
         #check_in = input(f"Would you like to begin? (Y/N): ")
         #for check_in == 'Y':
+        path = None
+        norm = None
+        reproject = None
         filetypes = r"\.(shp|csv)$"
         mthds = r"(clip|crs|null)"
         crs = r"(0|1|2|3|4|5|6|7|8|9)"
@@ -31,8 +35,7 @@ def main():
                     raise ValueError(f"Incorrect file type!")
                 break
             except ValueError as error:
-                print(error)
-                path = input(f"Change file type or enter a different file with type {filetypes}: ")
+                print(f"{error} Change file type or enter a different file with type {filetypes}")
         # Normalization
         while True:
             norm = input(f"Enter the normalization method: ")
@@ -41,8 +44,7 @@ def main():
                     raise ValueError(f"Unknown or unsupported method!")
                 break
             except ValueError as error:
-                print(error)
-                norm = input(f"Select from the options listed {mthds}: ")
+                print(f"{error} Select from the options listed {mthds}")
         # Reproject
         while True:
             reproject = input(f"Enter the preferred CRS: ")
@@ -54,8 +56,7 @@ def main():
                     #check_in(f"Continue? (Y/N): ")
                 break
             except ValueError as error:
-                print(error)
-                reproject = input(f"Please enter a valid CRS projection: ")
+                print(f"{error} Please enter a valid CRS projection")
         # Naturalize(Wishlist function, not necessary)
         while True:
             population = input(f"Naturalize the population? (Y/N): ")
@@ -70,7 +71,6 @@ def main():
         while True:
             break
         # Export
-
         return path, norm, reproject
 
     args = smoother.parse_args(get_info())
