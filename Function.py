@@ -33,20 +33,39 @@ def csv_to_df(csv_path, lat_col=None, lon_col=None, geometry_col=None, crs="EPSG
     raise ValueError("Latitude and longitude columns must be provided.")
 
 
-def validate(gdf, fill_value=0):
+def validate(gdf, numeric_fill=0, text_fill="Unknown"):
 
-    gdf = gdf.copy()
+    # # Copy original data
+    # gdf = gdf.copy()
 
-    # Select all columns except geometry
     columns = gdf.columns.drop(gdf.geometry.name)
 
-    # Replace missing values
-    gdf[columns] = gdf[columns].fillna(fill_value)
+    # Check missing values before replacement
+    missing = gdf[columns].isna().sum()
+
+    print("Missing values before validation:")
+    print(missing[missing > 0])
+
+    # Separate numerical and non-numerical columns
+    numeric_cols = gdf[columns].select_dtypes(
+        include="number"
+    ).columns
+
+    text_cols = gdf[columns].select_dtypes(
+        include=["object", "string"]
+    ).column\
+
+    gdf[numeric_cols] = gdf[numeric_cols].fillna(numeric_fill)
+
+    # Replace missing text values
+    gdf[text_cols] = gdf[text_cols].fillna(text_fill)
+
+    # Check remaining missing values
+    remaining = gdf[columns].isna().sum().sum()
+
+    print(f"Missing attribute values remaining: {remaining}")
 
     return gdf
-
-def clip(gdf, state_name):
-    state=gdp
     
 
 
